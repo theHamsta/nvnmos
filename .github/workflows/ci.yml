@@ -34,5 +34,10 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.config }} \
             src
       - name: Build nvnmos
+        if: runner.os == 'linux'
         run: |
           cmake --build build --parallel
+      - name: Build nvnmos
+        if: runner.os == 'Windows'
+        run: |
+          cmake --build build --parallel --config ${{ matrix.config }}
